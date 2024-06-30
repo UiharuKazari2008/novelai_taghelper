@@ -3,3 +3,10 @@
     background-color: darkred;
     border-color: var(--bs-btn-hover-border-color);
 }
+
+.disablegroupbutton,
+.disablegroupbutton:hover  {
+    color: white;
+    background-color: #4a8600;
+    border-color: darkgreen;
+}
