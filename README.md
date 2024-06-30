@@ -1,4 +1,4 @@
-# NovelAI Taghelper
+# NovelAI Tag Helper Plus
 
 This is a simple in-browser utility designed for support AI art prompt building/organization in [NovelAI](https://novelai.net/image).
 
@@ -6,6 +6,20 @@ You may access it [here](https://spedr.github.io/novelai_taghelper/).
 
 ## Usage
 Add tags using either the textfield or the `+` button. Tags can be edited by double-clicking and moved around with drag and drop. Once you have finished organizing your taglist, the full prompt can then be copied to the clipboard through the `<>` button.
+
+## Additions
+- Rewrite of a lot of functions
+- Realistic icons that depict what the function is
+- Added Delete button to delete a tag from the list
+- Tag group storage, store as many groups of tags as you want and add them to your workspace or replace
+- `CTRL+V`: Adds clipboard to tag list
+- `CTRL+SHIFT+V`: Replaces tag list from clipboard
+
+### ToDo List
+- Dark Mode
+- StableDiffustion Tag system mode
+- Saving groups of tags
+- Saving taglist as a preset
 
 ## Controls and Features
 

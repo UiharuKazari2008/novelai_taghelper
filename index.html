@@ -1,230 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NAI Art Taghelper</title>
     <link rel="stylesheet" href="style.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js" integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  </head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"
+            integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="vendor/fontawesome/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
 <body>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.hotkeys/list/jquery.hotkeys.min.js" integrity="sha512-njd096AjZyGuWOttOsHolCOFjq9Xg9txZTl6Pd7FOpwf1nyBDsOXpS1cd184l/EWy5ekDJZldDMQPs9bLCSAtQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.hotkeys/list/jquery.hotkeys.min.js"
+            integrity="sha512-njd096AjZyGuWOttOsHolCOFjq9Xg9txZTl6Pd7FOpwf1nyBDsOXpS1cd184l/EWy5ekDJZldDMQPs9bLCSAtQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
     <div class="container mt-3">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
         <div class="text center row">
-          <div class="col-sm">
-            
-            <div id="simpleList" class="list-group col">
+            <div class="col-sm">
+                <div id="simpleList" class="list-group col">
+                </div>
             </div>
-          </div>
-          <div class="col-sm">
-            <button type="button" class="add-el btn btn-light" title="Append a tag to the list"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-            </svg></button>
-            <button type="button" class="copyclipboard btn btn-light" title="Copy prompt to clipboard"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code" viewBox="0 0 16 16">
-                <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
-              </svg></button>
-            <button type="button" class="cleartags btn btn-light" title="Clear all tags"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-            </svg></button>
-            <button type="button" class="savecontext btn btn-light" title="Save context of the current tags"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
-              <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
-            </svg></button>
-            <div class="row">
-                <div class="input-group mb-3 mt-2">
+            <div class="col-sm">
+                <div class="input-group">
                     <div class="input-group-prepend">
-                      <button id="readtext" class="btn btn-outline-secondary" type="button" title="Import tags from text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-90deg-left" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M1.146 4.854a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H12.5A2.5 2.5 0 0 1 15 6.5v8a.5.5 0 0 1-1 0v-8A1.5 1.5 0 0 0 12.5 5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4z"/>
-                      </svg></button>
+                        <button type="button" class="add-el btn btn-light" title="Append a tag to the list">
+                            <i class="fa-light fa-plus-circle"></i>
+                        </button>
+                        <button type="button" class="copyclipboard btn btn-light" title="Copy prompt to clipboard">
+                            <i class="fa-light fa-clipboard"></i>
+                        </button>
+                        <button type="button" class="cleartags btn btn-light" title="Clear all tags">
+                            <i class="fa-light fa-eraser"></i>
+                        </button>
+                        <button type="button" class="savecontext btn btn-light" title="Save context of the current tags">
+                            <i class="fa-light fa-save"></i>
+                        </button>
                     </div>
-                    <input id="inputtxt" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                  </div>
+                    <input id="groupname" type="text" class="form-control" placeholder="default" aria-label=""
+                           aria-describedby="basic-addon1">
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3 mt-2">
+                        <div class="input-group-prepend">
+                            <button id="readtext" class="btn btn-outline-secondary" type="button"
+                                    title="Import tags from text">
+                                <i class="fa-light fa-arrow-left"></i>
+                                </svg></button>
+                        </div>
+                        <input id="inputtxt" type="text" class="form-control" placeholder="" aria-label=""
+                               aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="group-names" class="list-group col">
+                        <h3>
+                            <span>No Saved Groups</span>
+                        </h3>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
     </div>
+    <link href="css/style.css" rel="stylesheet" crossorigin="anonymous">
 </body>
 
 <script>
-    var tag1 = `<div class="d-flex"><button type="button" class="btn btn-outline-secondary btn-md rounded-0 tagbutton hidebtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
-                <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
-                <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
-                <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
-              </svg></button><button type="button" class="btn btn-outline-secondary btn-md rounded-0 tagbutton minusbutton"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-  <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-</svg></button><li class="list-group-item d-inline-flex tagitem" ondblclick="this.contentEditable=true;this.className='list-group-item d-inline-flex tagitem';" onblur="this.contentEditable=false;this.className='list-group-item d-inline-flex tagitem';" contenteditable="false">Tag</li><button type="button" class="btn btn-outline-secondary tagbutton rounded-0 plusbutton"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-</svg></button></div>`;
-    var tag2 = `<div class="d-flex"><button type="button" class="btn btn-outline-secondary btn-md rounded-0 tagbutton hidebtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
-                <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
-                <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
-                <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
-              </svg></button><button type="button" class="btn btn-outline-secondary btn-md rounded-0 tagbutton minusbutton"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-  <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-</svg></button><li class="list-group-item d-inline-flex tagitem" ondblclick="this.contentEditable=true;this.className='list-group-item d-inline-flex tagitem';" onblur="this.contentEditable=false;this.className='list-group-item d-inline-flex tagitem';" contenteditable="false">`;
-    var tag3 = `</li><button type="button" class="btn btn-outline-secondary tagbutton rounded-0 plusbutton"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-</svg></button></div>`;
-    var text = "";
-    set();
+    const groupElementStart = `<div class="d-flex w-100 mx-2"><button type="button" class="btn btn-outline-secondary btn-md rounded-0 tagbutton btn-red deletegroupbutton"><i class="fa-light fa-times"></i></button><button type="button" class="btn btn-outline-secondary btn-md rounded-0 tagbutton plusgroupbutton"><i class="fa-light fa-plus-square"></i></button><button type="button" class="btn btn-outline-secondary btn-md rounded-0 tagbutton replacegroupbutton"><i class="fa-light fa-arrow-left"></i></button><li class="list-group-item d-inline-flex groupitem w-100" contenteditable="false">`;
+    const groupElementEnd = `</li></div>`;
 
-    let mysortable = Sortable.create(simpleList, { 
+    const tagElementStart = `<div class="d-flex"><button type="button" class="btn btn-outline-secondary btn-md rounded-0 tagbutton btn-red deletebutton"><i class="fa-light fa-times"></i></button><button type="button" class="btn btn-outline-secondary btn-md rounded-0 tagbutton hidebtn"><i class="fa-light fa-eye-slash"></i></button><button type="button" class="btn btn-outline-secondary btn-md rounded-0 tagbutton minusbutton"><i class="fa-light fa-minus-square"></i></button><li class="list-group-item d-inline-flex tagitem" ondblclick="this.contentEditable=true;this.className='list-group-item d-inline-flex tagitem';" onblur="this.contentEditable=false;this.className='list-group-item d-inline-flex tagitem';" contenteditable="false">`;
+    const tagElementEnd = `</li><button type="button" class="btn btn-outline-secondary tagbutton rounded-0 plusbutton"><i class="fa-light fa-plus-square"></i></button></div>`;
+
+    loadSavedData();
+    updateGroupList();
+
+    let mysortable = Sortable.create(simpleList, {
         ghostClass: 'blue-background-class',
         animation: 150,
         removeOnSpill: true
     });
-    
-    $(document).on('click', '.add-el', function(){
-    var lst = $('#simpleList');
-    lst.append(tag1);
-    });
 
-    $(document).on('click', '.copyclipboard', function(){
-    var lst = $('#simpleList');
-    text = "";
+    function compileTags() {
+        const lst = $('#simpleList');
+        let text = "";
 
-
-    for (let item of lst[0].children){
-      if (!item.classList.contains('parenttransparent')){
-        text+=item.children[2].textContent + ',';
-      }
-    }
-    navigator.clipboard.writeText(text);
-    });
-
-    $(document).on('click', '.plusbutton', function(){
-      var parentDiv = $(this).parent();
-      parentDiv[0].children[2].textContent = increasePriority(parentDiv[0].children[2].textContent);
-    });
-
-    $(document).on('click', '.minusbutton', function(){
-      var parentDiv = $(this).parent();
-      parentDiv[0].children[2].textContent = lowerPriority(parentDiv[0].children[2].textContent);
-    });
-
-    $(document).on('click', '.cleartags', function(){
-      var lst = $('#simpleList');
-      lst[0].innerHTML = "";
-    });
-
-    $(document).on('click', '.savecontext', function(){
-      saveContext();
-    });
-
-    $(document).on('click', '.hidebtn', function(){
-      toggleDisable($(this).parent(), $(this));
-    });
-
-    $(document).on('click', '.enablebtn', function(){
-      toggleEnable($(this).parent(), $(this));
-    });
-
-    $(document).bind('keydown', 'ctrl+c', function(){
-    var lst = $('#simpleList');
-    text = "";
-
-
-    for (let item of lst[0].children){
-      if (!item.classList.contains('parenttransparent')){
-        text+=item.children[2].textContent + ',';
-      }
-    }
-    navigator.clipboard.writeText(text);
-    });
-
-
-    $(document).on('click', '#readtext', function(){
-    var lst = $('#simpleList');
-    var txt = $('#inputtxt');
-    let txtvalue = txt[0].value;
-    txt[0].value = ""
-    
-    split = txtvalue.split(',')
-    text = "";
-
-    for (let item of split){
-        if (item.charAt(0) == ' '){
-            item = item.substring(1);
+        for (let item of lst[0].children) {
+            if (!item.classList.contains('parenttransparent')) {
+                text += item.children[3].textContent.trim() + ', ';
+            }
         }
-        if (item.substring(item.length -1) == ' '){
-            item = item.substring(0, item.length -1);
-        }
-        item = item.replaceAll('_', ' ');
+        navigator.clipboard.writeText(text);
+    }
+    function decompileTags(txtvalue) {
+        const split = txtvalue.split(',')
+        let text = "";
 
-        if(item != ''){
-          text+='\n' + tag2 + item + tag3;
+        for (let item of split) {
+            if (item.charAt(0) === ' ') {
+                item = item.substring(1);
+            }
+            if (item.substring(item.length - 1) === ' ') {
+                item = item.substring(0, item.length - 1);
+            }
+            item = item.replaceAll('_', ' ');
+
+            if (item !== '') {
+                text += '\n' + tagElementStart + item + tagElementEnd;
+            }
+        }
+        return text
+    }
+    async function loadTags() {
+        let lst = $('#simpleList');
+        let txt = $('#inputtxt');
+
+        const txtValue = await navigator.clipboard.readText();
+        const text = decompileTags(txtValue);
+        txt[0].value = ""
+
+        lst[0].innerHTML = text;
+    }
+    async function addTags() {
+        let lst = $('#simpleList');
+        let txt = $('#inputtxt');
+
+        const txtValue = await navigator.clipboard.readText();
+        const text = decompileTags(txtValue);
+        txt[0].value = ""
+
+        lst[0].innerHTML += text;
+    }
+    function toggleDisable(tag, child) {
+        tag.removeClass("parentopaque");
+        tag.addClass('parenttransparent');
+
+        child.removeClass('hidebtn');
+        child.addClass('enablebtn');
+
+        child[0].innerHTML = `<i class="fa-light fa-eye"></i>`
+    }
+    function toggleEnable(tag, child) {
+        tag.removeClass("parenttransparent");
+        tag.addClass('parentopaque');
+
+        child.removeClass('enablebtn');
+        child.addClass('hidebtn');
+
+        child[0].innerHTML = `<i class="fa-light fa-eye-slash"></i>`
+    }
+    function lowerPriority(mstr) {
+        if (mstr.startsWith('{') && mstr.endsWith('}')) {
+            mstr = mstr.slice(1, -1);
+        } else {
+            mstr = '[' + mstr + ']';
+        }
+        return mstr.trim();
+    }
+    function increasePriority(mstr) {
+        if (mstr.startsWith('[') && mstr.endsWith(']')) {
+            mstr = mstr.slice(1, -1);
+        } else {
+            mstr = '{' + mstr + '}';
+        }
+        return mstr.trim();
+    }
+    // TODO: WTF is this, move this to a object...
+    function saveContext() {
+        let groupname = $('#groupname');
+        let tags = $('#simpleList')[0];
+        let group = (groupname[0].value && groupname[0].value.length > 0) ? groupname[0].value : "default";
+        group = group.split(" ").join("_").trim();
+
+        localStorage.setItem(`taggroup-${group}`, tags.innerHTML);
+        updateGroupList();
+    }
+    function loadSavedData() {
+        let content = localStorage.getItem("taggroup-default")
+        if (content) {
+            $('#simpleList')[0].innerHTML = content;
+        }
+    }
+    function updateGroupList() {
+        let lst = $('#group-names');
+        let list = Object.keys(localStorage);
+        if (list && list.length > 0) {
+            list = list
+                .filter(e => e.startsWith("taggroup-"))
+                .map(e => e.split('taggroup-').pop())
+                .filter(e => e !== "default")
+            if (list.length > 0) {
+                lst[0].innerHTML = "";
+                list.forEach(n => {
+                    let name = n.split(" ").join("_").trim();
+                    lst.append(`${groupElementStart}${name}${groupElementEnd}`);
+                })
+            }
         }
     }
 
-    lst[0].innerHTML+= text;
+    $(document).on('click', '.copyclipboard', compileTags);
+    $(document).bind('keydown', 'ctrl+c', compileTags);
+    $(document).bind('keydown', 'ctrl+v', addTags);
+    $(document).bind('keydown', 'ctrl+shift+v', loadTags);
 
+    // Tag list actions
+    $(document).on('click', '.add-el', function () {
+        let lst = $('#simpleList');
+        lst.append(`${tagElementStart}Tag${tagElementEnd}`);
+    });
+    $(document).on('click', '.plusbutton', function () {
+        let parentDiv = $(this).parent();
+        parentDiv[0].children[3].textContent = increasePriority(parentDiv[0].children[3].textContent);
+    });
+    $(document).on('click', '.minusbutton', function () {
+        let parentDiv = $(this).parent();
+        parentDiv[0].children[3].textContent = lowerPriority(parentDiv[0].children[3].textContent);
+    });
+    $(document).on('click', '.hidebtn', function () {
+        toggleDisable($(this).parent(), $(this));
+    });
+    $(document).on('click', '.enablebtn', function () {
+        toggleEnable($(this).parent(), $(this));
+    });
+    $(document).on('click', '.deletebutton', function () {
+        $(this).parent().remove();
     });
 
-    function increasePriority(mstr){
-      if (mstr.startsWith('[') && mstr.endsWith(']')){
-        mstr = mstr.slice(1, -1);
-      } else {
-        mstr = '{' + mstr + '}';
-      }
-      return mstr;
-    }
+    $(document).on('click', '.deletegroupbutton', function () {
+        const group = `taggroup-${$(this).parent()[0].children[3].innerText}`;
+        localStorage.removeItem(group)
+        $(this).parent().remove();
+    });
+    $(document).on('click', '.replacegroupbutton', function () {
+        const rawname = $(this).parent()[0].children[3].innerText;
+        const group = `taggroup-${rawname}`;
+        let name = rawname.split(" ").join("_").trim();
+        const content = localStorage.getItem(group);
+        if (content) {
+            $('#simpleList')[0].innerHTML = content;
+            $('#groupname')[0].value = name;
+        }
+    });
+    $(document).on('click', '.plusgroupbutton', function () {
+        const group = `taggroup-${$(this).parent()[0].children[3].innerText}`;
+        const content = localStorage.getItem(group);
+        if (content) {
+            const items = $(content);
+            items.map(it => {
+                $('#simpleList')[0].append(items[it]);
+            })
+        }
+    });
 
-    function lowerPriority(mstr){
-      if (mstr.startsWith('{') && mstr.endsWith('}')){
-        mstr = mstr.slice(1, -1);
-      } else {
-        mstr = '[' + mstr + ']';
-      }
-      return mstr;
-    }
+    $(document).on('click', '.cleartags', function () {
+        let lst = $('#simpleList');
+        lst[0].innerHTML = "";
+    });
+    $(document).on('click', '.savecontext', saveContext);
+    $(document).on('click', '#readtext', function () {
+        let lst = $('#simpleList');
+        let txt = $('#inputtxt');
+        const txtvalue = txt[0].value;
+        txt[0].value = ""
 
-  function saveContext() {
-    let tags = $('#simpleList')[0];
-    localStorage.setItem("html", tags.innerHTML);
-  }
-
-  
-  function set() {
-    let content = localStorage.getItem("html")
-    if(content) {
-      $('#simpleList')[0].innerHTML = content;
-    }
-  }
-
-  function toggleDisable(tag, child){
-    tag.removeClass("parentopaque");
-    tag.addClass('parenttransparent');
-
-    child.removeClass('hidebtn');
-    child.addClass('enablebtn');
-
-    child[0].innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-</svg>`
-  }
-
-  function toggleEnable(tag, child){
-    tag.removeClass("parenttransparent");
-    tag.addClass('parentopaque');
-
-    child.removeClass('enablebtn');
-    child.addClass('hidebtn');
-
-    child[0].innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
-  <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
-  <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
-  <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
-</svg>`
-  }
-
-
-
+        const text = decompileTags(txtvalue);
+        lst[0].innerHTML += text;
+    });
 </script>
