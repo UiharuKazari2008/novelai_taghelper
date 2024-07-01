@@ -373,8 +373,10 @@
         const txtvalue = txt[0].value;
         txt[0].value = ""
 
-        const tags = decompileTags(txtvalue);
-        const text = addTags(tags);
+        const inputtags = decompileTags(txtvalue);
+        const tags = dedupTags(inputtags);
+        const text = compileTagElement(tags);
+
         lst[0].innerHTML += text;
     });
 </script>
