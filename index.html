@@ -93,25 +93,57 @@
     });
 
     function compileTags() {
+        const text = getWorkspaceTags().join(", ");
+        navigator.clipboard.writeText(text);
+    }
+    function getWorkspaceTags(all = false) {
         const lst = $('#simpleList');
-        let text = "";
-        text = getEnabledGroups();
+        let array = [];
+        array.push(...getEnabledGroups());
         for (let item of lst[0].children) {
-            if (!item.classList.contains('parenttransparent')) {
-                text += item.children[3].textContent.trim() + ', ';
+            if (all || !item.classList.contains('parenttransparent')) {
+                array.push(item.children[3].textContent.trim());
             }
         }
-        navigator.clipboard.writeText(text);
+        return array
+    }
+    function tagNames(input) {
+        function extractTagName(tags) {
+            let res = []
+            for (let element of tags) {
+                let { name } = 0;
+                if (element.includes(',')) {
+                    res.push(...extractTagName(element.split(',').map(e => e.trim())));
+                } else {
+                    res.push(element.split('{').pop().split('[').pop().split('}')[0].split(']')[0].trim());
+                }
+            }
+            return res
+        }
+        return extractTagName(input)
     }
     function decompileTags(txtvalue) {
         const regex = /(?:\{[^}]*\}|\[[^\]]*\]|[^,])+/g;
         const split = txtvalue.match(regex);
-        let text = "";
 
+        return split.map(e => e.trim().replaceAll("_", " "))
+    }
+    function dedupTags(tags) {
+        const current = tagNames(getWorkspaceTags(true));
+        const removed = tags.filter(e => {
+            if (e.includes(",")) {
+                const t = tagNames(e);
+                return t.filter(f => current.indexOf(f) === -1).length > 0
+            }
+            const name = e.split('{').pop().split('[').pop().split('}')[0].split(']')[0].trim()
+            return current.indexOf(name) === -1
+        });
+        console.log(`Active: ${current.length} Added: ${removed.length}`)
+        return removed;
+    }
+    function compileTagElement(split) {
+        let text = ""
         for (let item of split) {
-            item = item.trim(); // Remove leading and trailing spaces
-            item = item.replaceAll('_', ' ');
-
             if (item !== '') {
                 text += '\n' + tagElementStart + item + tagElementEnd;
             }
@@ -123,7 +155,8 @@
         let txt = $('#inputtxt');
 
         const txtValue = await navigator.clipboard.readText();
-        const text = decompileTags(txtValue);
+        const tags = decompileTags(txtValue);
+        const text = compileTagElement(tags);
 
         txt[0].value = ""
         lst[0].innerHTML = text;
@@ -133,9 +166,11 @@
         let txt = $('#inputtxt');
 
         const txtValue = await navigator.clipboard.readText();
-        const text = decompileTags(txtValue);
-        txt[0].value = ""
+        const inputtags = decompileTags(txtValue);
+        const tags = dedupTags(inputtags);
+        const text = compileTagElement(tags);
 
+        txt[0].value = ""
         lst[0].innerHTML += text;
     }
     function toggleDisable(tag, child) {
@@ -216,7 +251,7 @@
     function getEnabledGroups() {
         const lst = $('#group-names .disablegroupbutton').parent()
         let list = Object.keys(localStorage);
-        let text = "";
+        let array = [];
         if (list && list.length > 0) {
             list = list
                 .filter(e => e.startsWith("taggroup-"))
@@ -231,15 +266,14 @@
                             const dataList = $(data);
                             for (let item of dataList) {
                                 if (item.children && !item.children[0].classList.contains('parenttransparent')) {
-                                    console.log(item.children[3].textContent.trim())
-                                    text += item.children[3].textContent.trim() + ', ';
+                                    array.push(item.children[3].textContent.trim());
                                 }
                             }
                         })
                 }
             }
         }
-        return text;
+        return array;
     }
     function parseElemets(lst) {
         let res = []
@@ -338,7 +372,8 @@
         const txtvalue = txt[0].value;
         txt[0].value = ""
 
-        const text = decompileTags(txtvalue);
+        const tags = decompileTags(txtvalue);
+        const text = addTags(tags);
         lst[0].innerHTML += text;
     });
 </script>
