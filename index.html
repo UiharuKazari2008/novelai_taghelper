@@ -60,11 +60,13 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Data
+                            Settings
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Import Groups</a></li>
-                            <li><a class="dropdown-item" href="#">Export Groups</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="importLocalStorage(); return false;">Import Groups</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="exportLocalStorage(); return false;">Export Groups</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="wipeLocalStorage(); return false;">Erase Settings</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -578,4 +580,51 @@
 
         lst[0].innerHTML += text;
     });
+
+    function exportLocalStorage() {
+        const data = JSON.stringify(localStorage);
+        const blob = new Blob([data], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'localStorageExport.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    function importLocalStorage() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'application/json';
+        input.onchange = async event => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = event => {
+                    const importedData = JSON.parse(event.target.result);
+                    const replace = confirm('Do you want to replace the current localStorage data? Click "Cancel" to only import new items instead.');
+
+                    for (const [key, value] of Object.entries(importedData)) {
+                        if (replace) {
+                            localStorage.setItem(key, value);
+                        } else {
+                            if (!localStorage.getItem(key)) {
+                                localStorage.setItem(key, value);
+                            }
+                        }
+                    }
+                };
+                reader.readAsText(file);
+            }
+        };
+        input.click();
+    }
+    function wipeLocalStorage() {
+        const ready = confirm('All date you have not exported will be lost forever!');
+        if (ready) {
+            localStorage.clear();
+        }
+    }
+
 </script>
