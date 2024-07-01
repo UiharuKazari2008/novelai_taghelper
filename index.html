@@ -437,9 +437,9 @@
     }
 
     $(document).on('click', '.copyclipboard', compileTags);
-    $(document).bind('keydown', 'ctrl+c', compileTags);
-    $(document).bind('keydown', 'ctrl+v', addTags);
-    $(document).bind('keydown', 'ctrl+shift+v', loadTags);
+    $(document).bind('keydown', 'ctrl+d', compileTags);
+    $(document).bind('keydown', 'ctrl+f', addTags);
+    $(document).bind('keydown', 'ctrl+shift+f', loadTags);
 
     // Tag list actions
     $(document).on('click', '.add-el', function () {
