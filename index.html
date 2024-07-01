@@ -145,14 +145,15 @@
     function saveSettings() {
         const enabled_groups = $('#group-names .disablegroupbutton').parent();
         if (enabled_groups && enabled_groups.length > 0) {
-            localStorage.setItem(`settings-groups`, JSON.stringify(enabled_groups
-                .map(n => {
-                    return {
-                        name: enabled_groups[n].children[2].innerText.split(" ").join("_").trim(),
-                        value: enabled_groups[n].children[4].innerText.trim()
-                    }
-                })
-            ));
+            localStorage.setItem(`settings-groups`, JSON.stringify({
+                enabled: enabled_groups
+                    .map(n => {
+                        return {
+                            name: enabled_groups[n].children[2].innerText.split(" ").join("_").trim(),
+                            value: enabled_groups[n].children[4].innerText.trim()
+                        }
+                    })
+            });
         }
     }
     function compileTags() {
@@ -357,7 +358,7 @@
     function updateGroupList(enabled) {
         let lst = $('#group-names');
         let list = Object.keys(localStorage);
-        const enlist = (enabled) ? Object.values(JSON.parse(enabled)) : undefined;
+        const enlist = (enabled) ? Object.values((JSON.parse(enabled)).enabled) : undefined;
         if (list && list.length > 0) {
             list = list
                 .filter(e => e.startsWith("taggroup-"))
@@ -410,7 +411,6 @@
                             if (intentity === '-') {
                                 array.push(...temp);
                             } else {
-                                temp = tagNames(temp);
                                 if (intentity.includes('-') && intentity.length > 1) {
                                     array.push(addNegativeMultiplayer(' ' + temp.join(', ') + ' ', parseInt(intentity.replace('-', ''))))
                                 } else {
