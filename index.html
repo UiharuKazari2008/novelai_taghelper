@@ -358,7 +358,7 @@
     function updateGroupList(enabled) {
         let lst = $('#group-names');
         let list = Object.keys(localStorage);
-        const enlist = (enabled) ? (JSON.parse(enabled)).enabled : undefined;
+        const enlist = (enabled) ? Object.values((JSON.parse(enabled)).enabled) : undefined;
         if (list && list.length > 0) {
             list = list
                 .filter(e => e.startsWith("taggroup-"))
@@ -460,9 +460,33 @@
     }
 
     $(document).on('click', '.copyclipboard', compileTags);
-    $(document).bind('keydown', 'ctrl+d', compileTags);
-    $(document).bind('keydown', 'ctrl+i', addTags);
-    $(document).bind('keydown', 'ctrl+shift+i', loadTags);
+    $(document).bind('keydown', 'ctrl+c', () => {
+        let focusedElement = document.activeElement;
+        let isTextBox = focusedElement.tagName === 'INPUT' ||
+            focusedElement.tagName === 'TEXTAREA' ||
+            focusedElement.isContentEditable;
+
+        if (!isTextBox)
+            compileTags();
+    });
+    $(document).bind('keydown', 'ctrl+v', () => {
+        let focusedElement = document.activeElement;
+        let isTextBox = focusedElement.tagName === 'INPUT' ||
+            focusedElement.tagName === 'TEXTAREA' ||
+            focusedElement.isContentEditable;
+
+        if (!isTextBox)
+            addTags();
+    });
+    $(document).bind('keydown', 'ctrl+shift+v', () => {
+        let focusedElement = document.activeElement;
+        let isTextBox = focusedElement.tagName === 'INPUT' ||
+            focusedElement.tagName === 'TEXTAREA' ||
+            focusedElement.isContentEditable;
+
+        if (!isTextBox)
+            loadTags();
+    });
 
     // Tag list actions
     $(document).on('click', '.add-el', function () {
