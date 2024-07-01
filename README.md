@@ -17,8 +17,8 @@ Add tags using either the textfield or the `+` button. Tags can be edited by dou
     - There hidden from your workspace to keep things simple
 - Handles encapsulated groups correctly
 - `CTRL+D` replaces `CTRL+C`
-- `CTRL+F`: Adds clipboard to tag list (Deduplicate Input against workspace and enabled items)
-- `CTRL+SHIFT+F`: Replaces tag list from clipboard
+- `CTRL+I`: Adds clipboard to tag list (Deduplicate Input against workspace and enabled items)
+- `CTRL+SHIFT+I`: Replaces tag list from clipboard
 
 ### ToDo List
 - Dark Mode
