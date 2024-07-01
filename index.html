@@ -105,23 +105,19 @@
         navigator.clipboard.writeText(text);
     }
     function decompileTags(txtvalue) {
-        const split = txtvalue.split(',')
+        const regex = /(?:\{[^}]*\}|\[[^\]]*\]|[^,])+/g;
+        const split = txtvalue.match(regex);
         let text = "";
 
         for (let item of split) {
-            if (item.charAt(0) === ' ') {
-                item = item.substring(1);
-            }
-            if (item.substring(item.length - 1) === ' ') {
-                item = item.substring(0, item.length - 1);
-            }
+            item = item.trim(); // Remove leading and trailing spaces
             item = item.replaceAll('_', ' ');
 
             if (item !== '') {
                 text += '\n' + tagElementStart + item + tagElementEnd;
             }
         }
-        return text
+        return text;
     }
     async function loadTags() {
         let lst = $('#simpleList');
