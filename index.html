@@ -358,7 +358,7 @@
     function updateGroupList(enabled) {
         let lst = $('#group-names');
         let list = Object.keys(localStorage);
-        const enlist = (enabled) ? Object.values((JSON.parse(enabled)).enabled) : undefined;
+        const enlist = (enabled) ? (JSON.parse(enabled)).enabled : undefined;
         if (list && list.length > 0) {
             list = list
                 .filter(e => e.startsWith("taggroup-"))
