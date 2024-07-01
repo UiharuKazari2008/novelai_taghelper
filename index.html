@@ -368,8 +368,8 @@
                 lst[0].innerHTML = "";
                 list.forEach(n => {
                     let name = n.split("_").join(" ").trim();
-                    if (enabled && enlist.map(e => e.name).indexOf(name) !== -1) {
-                        const multiplyer = enlist[enlist.map(e => e.name).indexOf(name)].value
+                    if (enabled && enlist.map(e => e.name).indexOf(n) !== -1) {
+                        const multiplyer = enlist[enlist.map(e => e.name).indexOf(n)].value
                         lst.append(`${groupElementStartEnabled}${name}${groupElementMiddle}${multiplyer}${groupElementEnd}`);
                     } else {
                         lst.append(`${groupElementStart}${name}${groupElementMiddle}-${groupElementEnd}`);
