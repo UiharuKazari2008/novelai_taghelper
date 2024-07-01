@@ -217,13 +217,16 @@
     }
     // TODO: move this to a object...
     function saveContext() {
+        let last = Object.keys(localStorage);
         let groupname = $('#groupname');
         let tags = $('#simpleList')[0];
         let group = (groupname[0].value && groupname[0].value.length > 0) ? groupname[0].value : "default";
         group = group.split(" ").join("_").trim();
 
         localStorage.setItem(`taggroup-${group}`, tags.innerHTML);
-        updateGroupList();
+        let updated = Object.keys(localStorage);
+        if (updated.filter(e => last.indexOf(e) === -1).length > 0)
+            updateGroupList();
     }
     function loadSavedData() {
         let content = localStorage.getItem("taggroup-default")
