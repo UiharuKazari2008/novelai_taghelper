@@ -27,17 +27,14 @@
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="d-flex">
-                    <div class="input-group me-3">
-                        <div class="input-group-prepend">
-                            <button type="button" class="add-el btn btn-success" title="Append a tag to the list">
+                    <div class="input-group me-2">
+                        <input id="inputtxt" type="text" class="form-control" placeholder="Add Tags" aria-label=""
+                               aria-describedby="basic-addon1">
+                        <div class="input-group-append">
+                            <button id="readtext" class="btn border-dark-subtle  btn-success" type="button"
+                                    title="Import tags from text">
                                 <i class="fa-light fa-plus-circle"></i>
-                            </button>
-                            <button type="button" class="copyclipboard btn btn-primary" title="Copy prompt to clipboard">
-                                <i class="fa-light fa-clipboard"></i>
-                            </button>
-                            <button type="button" class="cleartags btn btn-danger" title="Clear all tags">
-                                <i class="fa-light fa-trash-alt"></i>
-                            </button>
+                                </svg></button>
                         </div>
                     </div>
                 </div>
@@ -79,19 +76,19 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="d-flex">
-                    <div class="input-group mx-2">
+                <div class="d-flex ms-2">
+                    <div class="input-group">
                         <div class="input-group-prepend">
-                            <button id="readtext" class="btn border-dark-subtle  btn-outline-secondary" type="button"
-                                    title="Import tags from text">
-                                <i class="fa-light fa-arrow-left"></i>
-                                </svg></button>
+                            <button type="button" class="copyclipboard btn btn-primary" title="Copy prompt to clipboard">
+                                <i class="fa-light fa-clipboard"></i>
+                            </button>
+                            <button type="button" class="cleartags btn btn-danger" title="Clear all tags">
+                                <i class="fa-light fa-trash-alt"></i>
+                            </button>
                         </div>
-                        <input id="inputtxt" type="text" class="form-control" placeholder="Add Tags" aria-label=""
-                               aria-describedby="basic-addon1">
                     </div>
                 </div>
-                <div class="d-flex align-items-center ms-4">
+                <div class="d-flex align-items-center ms-2">
                     <span class="badge bg-white text-black font-monospace fs-6" id="tokencount">3</span>
                 </div>
             </div>
@@ -109,13 +106,13 @@
             </div>
             <div class="col-sm">
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
+                    <input id="groupname" type="text" class="form-control" placeholder="default" aria-label=""
+                           aria-describedby="basic-addon1">
+                    <div class="input-group-append">
                         <button type="button" class="savecontext btn btn-primary" title="Save context of the current tags">
                             <i class="fa-light fa-save"></i>
                         </button>
                     </div>
-                    <input id="groupname" type="text" class="form-control" placeholder="default" aria-label=""
-                           aria-describedby="basic-addon1">
                 </div>
                 <div class="row">
                     <div id="group-names" class="list-group col">
@@ -610,6 +607,27 @@
 
         lst[0].innerHTML += text;
     });
+    document.getElementById('inputtxt').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            let lst = $('#simpleList');
+            let txt = $('#inputtxt');
+            const txtvalue = txt[0].value;
+            txt[0].value = ""
+
+            const inputtags = decompileTags(txtvalue);
+            const tags = dedupTags(inputtags);
+            const text = compileTagElement(tags);
+
+            lst[0].innerHTML += text;
+        }
+    });
+
+    function myFunction() {
+        // Your function logic here
+        console.log('Enter key pressed, function triggered!');
+    }
+
 
     function exportLocalStorage() {
         const data = JSON.stringify(localStorage);
