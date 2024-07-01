@@ -239,6 +239,7 @@
                 .filter(e => e.startsWith("taggroup-"))
                 .map(e => e.split('taggroup-').pop())
                 .filter(e => e !== "default")
+                .sort()
             if (list.length > 0) {
                 lst[0].innerHTML = "";
                 list.forEach(n => {
