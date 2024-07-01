@@ -2,7 +2,7 @@
 
 This is a simple in-browser utility designed for support AI art prompt building/organization in [NovelAI](https://novelai.net/image).
 
-You may access it [here](https://spedr.github.io/novelai_taghelper/).
+You may access it [here](https://uiharukazari2008.github.io/novelai_taghelper/).
 
 ## Usage
 Add tags using either the textfield or the `+` button. Tags can be edited by double-clicking and moved around with drag and drop. Once you have finished organizing your taglist, the full prompt can then be copied to the clipboard through the `<>` button.
