@@ -11,7 +11,11 @@ Add tags using either the textfield or the `+` button. Tags can be edited by dou
 - Rewrite of a lot of functions
 - Realistic icons that depict what the function is
 - Added Delete button to delete a tag from the list
-- Tag group storage, store as many groups of tags as you want and add them to your workspace or replace
+- Tag group storage
+  - Load preset queries into the workspace
+  - Check the box to include the tags in your copied results
+    - There hidden from your workspace to keep things simple
+- Handles encapsulated groups correctly
 - `CTRL+V`: Adds clipboard to tag list
 - `CTRL+SHIFT+V`: Replaces tag list from clipboard
 
