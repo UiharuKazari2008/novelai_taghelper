@@ -144,9 +144,6 @@
         removeOnSpill: true
     });
 
-    const addPositiveMultiplayer = (str, num) => `{`.repeat(num) + str + `}`.repeat(num);
-    const addNegativeMultiplayer = (str, num) => `[`.repeat(num) + str + `]`.repeat(num);
-
     function saveSettings() {
         const enabled_groups = $('#group-names .disablegroupbutton').parent();
         if (enabled_groups && enabled_groups.length > 0) {
@@ -390,6 +387,9 @@
     }
 
     function getEnabledGroups() {
+        const addPositiveMultiplayer = (str, num) => `{`.repeat(num) + str + `}`.repeat(num);
+        const addNegativeMultiplayer = (str, num) => `[`.repeat(num) + str + `]`.repeat(num);
+
         const lst = $('#group-names .disablegroupbutton').parent()
         let list = Object.keys(localStorage);
         let array = [];
