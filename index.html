@@ -127,13 +127,14 @@
 
 <script>
     const groupElementStart = `<div class="d-flex w-100 mx-2"><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton enablegroupbutton"><i class="fa-light fa-check-square"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton replacegroupbutton"><i class="fa-light fa-arrow-left"></i></button><li class="list-group-item d-inline-flex groupitem w-100" contenteditable="false">`;
-    const groupElementEnd = `</li><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton grouplowerbutton"><i class="fa-light fa-minus"></i></button><li class="list-group-item d-inline-flex intensity" contenteditable="false">-</li><button type="button" class="btn border-dark-subtle  btn-outline-secondary tagbutton rounded-0 groupaddbutton"><i class="fa-light fa-plus"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton btn-red deletegroupbutton"><i class="fa-light fa-trash-alt"></i></button></div>`;
+    const groupElementStartEnabled = `<div class="d-flex w-100 mx-2"><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton disablegroupbutton"><i class="fa-light fa-check-square"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton replacegroupbutton"><i class="fa-light fa-arrow-left"></i></button><li class="list-group-item d-inline-flex groupitem w-100" contenteditable="false">`;
+    const groupElementMiddle = `</li><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton grouplowerbutton"><i class="fa-light fa-minus"></i></button><li class="list-group-item d-inline-flex intensity" contenteditable="false">`
+    const groupElementEnd = `</li><button type="button" class="btn border-dark-subtle  btn-outline-secondary tagbutton rounded-0 groupaddbutton"><i class="fa-light fa-plus"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton btn-red deletegroupbutton"><i class="fa-light fa-trash-alt"></i></button></div>`;
 
     const tagElementStart = `<div class="d-flex"><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton btn-red deletebutton"><i class="fa-light fa-times"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton hidebtn"><i class="fa-light fa-eye-slash"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton minusbutton"><i class="fa-light fa-minus"></i></button><li class="list-group-item d-inline-flex tagitem" ondblclick="this.contentEditable=true;this.className='list-group-item d-inline-flex tagitem';" onblur="this.contentEditable=false;this.className='list-group-item d-inline-flex tagitem';" contenteditable="false">`;
     const tagElementEnd = `</li><button type="button" class="btn border-dark-subtle  btn-outline-secondary tagbutton rounded-0 plusbutton"><i class="fa-light fa-plus"></i></button></div>`;
 
     loadSavedData();
-    updateGroupList();
 
     let mysortable = Sortable.create(simpleList, {
         ghostClass: 'blue-background-class',
@@ -141,10 +142,24 @@
         removeOnSpill: true
     });
 
+    function saveSettings() {
+        const enabled_groups = $('#group-names .disablegroupbutton').parent();
+        if (enabled_groups && enabled_groups.length > 0) {
+            localStorage.setItem(`settings-groups`, JSON.stringify(enabled_groups
+                .map(n => {
+                    return {
+                        name: enabled_groups[n].children[2].innerText.split(" ").join("_").trim(),
+                        value: enabled_groups[n].children[4].innerText.trim()
+                    }
+                })
+            ));
+        }
+    }
     function compileTags() {
         let text = getWorkspaceTags().join(", ");
         //text = deduplicateTags(text);
         navigator.clipboard.writeText(text);
+        saveSettings();
     }
     function getWorkspaceTags(all = false) {
         const lst = $('#simpleList');
@@ -336,10 +351,13 @@
         if (content) {
             $('#simpleList')[0].innerHTML = content;
         }
+        const enabled = localStorage.getItem(`settings-groups`);
+        updateGroupList(enabled);
     }
-    function updateGroupList() {
+    function updateGroupList(enabled) {
         let lst = $('#group-names');
         let list = Object.keys(localStorage);
+        const enlist = (enabled) ? Object.values(JSON.parse(enabled)) : undefined;
         if (list && list.length > 0) {
             list = list
                 .filter(e => e.startsWith("taggroup-"))
@@ -350,7 +368,12 @@
                 lst[0].innerHTML = "";
                 list.forEach(n => {
                     let name = n.split("_").join(" ").trim();
-                    lst.append(`${groupElementStart}${name}${groupElementEnd}`);
+                    if (enabled && enlist.map(e => e.name).indexOf(name) !== -1) {
+                        const multiplyer = enlist[enlist.map(e => e.name).indexOf(name)].value
+                        lst.append(`${groupElementStartEnabled}${name}${groupElementMiddle}${multiplyer}${groupElementEnd}`);
+                    } else {
+                        lst.append(`${groupElementStart}${name}${groupElementMiddle}-${groupElementEnd}`);
+                    }
                 })
             }
         }
