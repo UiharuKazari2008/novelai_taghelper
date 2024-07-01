@@ -49,7 +49,8 @@
                             Tools
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" target="_blank" rel="noopener noreferrer" href="https://novelai-metadata-viewer.pages.dev/">Metadata Viewer</a></li>
+                            <li><a class="dropdown-item" target="_blank" rel="noopener noreferrer" href="https://novelai.net/inspect">Inspector</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" target="_blank" rel="noopener noreferrer" href="https://raideninfinity.pythonanywhere.com/naidv3_tag_search">Tag Search</a></li>
                             <li><a class="dropdown-item" target="_blank" rel="noopener noreferrer" href="https://minamoni-deepdanbooru-string.hf.space/">DeepDanbooru String</a></li>
                             <li><hr class="dropdown-divider"></li>
@@ -70,6 +71,9 @@
                         </ul>
                     </li>
                 </ul>
+                <div class="d-flex align-items-center">
+                    <span class="badge bg-white text-black font-monospace fs-6" id="tokencount">3</span>
+                </div>
             </div>
         </div>
     </nav>
@@ -163,6 +167,7 @@
         //text = deduplicateTags(text);
         navigator.clipboard.writeText(text);
         saveSettings();
+        updateTagCount();
     }
     function getWorkspaceTags(all = false) {
         const lst = $('#simpleList');
@@ -281,6 +286,7 @@
 
         txt[0].value = ""
         lst[0].innerHTML = text;
+        updateTagCount();
     }
     async function addTags() {
         let lst = $('#simpleList');
@@ -293,6 +299,7 @@
 
         txt[0].value = ""
         lst[0].innerHTML += text;
+        updateTagCount();
     }
     function toggleDisable(tag, child) {
         tag.removeClass("parentopaque");
@@ -356,6 +363,7 @@
         }
         const enabled = localStorage.getItem(`settings-groups`);
         updateGroupList(enabled);
+        updateTagCount();
     }
     function updateGroupList(enabled) {
         let lst = $('#group-names');
@@ -461,6 +469,22 @@
         return res
     }
 
+    function updateTagCount() {
+        const tags = (tagNames(getWorkspaceTags())).length
+        $('#tokencount')[0].innerText = tags;
+        if (tags >= 100) {
+            $('#tokencount').addClass("bg-danger")
+            $('#tokencount').addClass("text-white")
+            $('#tokencount').removeClass("bg-white")
+            $('#tokencount').removeClass("text-black")
+        } else {
+            $('#tokencount').addClass("bg-white")
+            $('#tokencount').addClass("text-black")
+            $('#tokencount').removeClass("bg-danger")
+            $('#tokencount').removeClass("text-white")
+        }
+    }
+
     $(document).on('click', '.copyclipboard', compileTags);
     $(document).bind('keydown', 'ctrl+c', () => {
         let focusedElement = document.activeElement;
@@ -494,6 +518,7 @@
     $(document).on('click', '.add-el', function () {
         let lst = $('#simpleList');
         lst.append(`${tagElementStart}Tag${tagElementEnd}`);
+        updateTagCount();
     });
     $(document).on('click', '.plusbutton', function () {
         let parentDiv = $(this).parent();
@@ -505,12 +530,15 @@
     });
     $(document).on('click', '.hidebtn', function () {
         toggleDisable($(this).parent(), $(this));
+        updateTagCount();
     });
     $(document).on('click', '.enablebtn', function () {
         toggleEnable($(this).parent(), $(this));
+        updateTagCount();
     });
     $(document).on('click', '.deletebutton', function () {
         $(this).parent().remove();
+        updateTagCount();
     });
 
     $(document).on('click', '.deletegroupbutton', function () {
@@ -530,9 +558,11 @@
     });
     $(document).on('click', '.enablegroupbutton', function () {
         toggleGroupDisable($(this).parent(), $(this));
+        updateTagCount();
     });
     $(document).on('click', '.disablegroupbutton', function () {
         toggleGroupEnable($(this).parent(), $(this));
+        updateTagCount();
     });
     $(document).on('click', '.groupaddbutton', function () {
         let parentDiv = $(this).parent();
@@ -566,6 +596,7 @@
     $(document).on('click', '.cleartags', function () {
         let lst = $('#simpleList');
         lst[0].innerHTML = "";
+        updateTagCount();
     });
     $(document).on('click', '.savecontext', saveContext);
     $(document).on('click', '#readtext', function () {
