@@ -159,7 +159,7 @@
         }
     }
     function compileTags() {
-        let text = getWorkspaceTags().join(", ");
+        let text = getWorkspaceTags(false).join(", ");
         //text = deduplicateTags(text);
         navigator.clipboard.writeText(text);
         saveSettings();
@@ -168,7 +168,7 @@
     function getWorkspaceTags(all = false) {
         const lst = $('#simpleList');
         let array = [];
-        array.push(...getEnabledGroups());
+        array.push(...getEnabledGroups(true));
         for (let item of lst[0].children) {
             if (all || !item.classList.contains('parenttransparent')) {
                 array.push(item.children[3].textContent.trim());
@@ -471,7 +471,7 @@
     }
 
     function updateTagCount() {
-        const tags = (tagNames(getWorkspaceTags())).length
+        const tags = (tagNames(getWorkspaceTags(false))).length
         $('#tokencount')[0].innerText = tags;
         if (tags >= 100) {
             $('#tokencount').addClass("bg-danger")
