@@ -388,7 +388,7 @@
         }
     }
 
-    function getEnabledGroups(ignore_active) {
+    function getEnabledGroups() {
         const addPositiveMultiplayer = (str, num) => `{`.repeat(num) + str + `}`.repeat(num);
         const addNegativeMultiplayer = (str, num) => `[`.repeat(num) + str + `]`.repeat(num);
 
@@ -402,7 +402,7 @@
                 .filter(e => e.startsWith("taggroup-"))
                 .map(e => e.split('taggroup-').pop())
                 .filter(e => e !== "default")
-                .filter(e => !(ignore_active && group && e === group))
+                .filter(e => e !== group)
                 .sort()
             if (list.length > 0) {
                 if (lst && lst.length > 0) {
