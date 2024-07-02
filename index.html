@@ -395,7 +395,7 @@
         const lst = $('#group-names .disablegroupbutton').parent()
         let list = Object.keys(localStorage);
         let groupname = $('#groupname');
-        let group = (groupname[0].value && groupname[0].value.length > 0) ? groupname[0].value.replaceAll(" ", "_").trim() : undefined;
+        let group = (groupname[0].value && groupname[0].value.length > 0) ? groupname[0].value.split(" ").join("_").trim() : undefined;
         let array = [];
         if (list && list.length > 0) {
             list = list
