@@ -402,7 +402,7 @@
                 .filter(e => e.startsWith("taggroup-"))
                 .map(e => e.split('taggroup-').pop())
                 .filter(e => e !== "default")
-                .filter(e => e !== group)
+                .filter(e => e !== group.replaceAll(" ", "_").trim())
                 .sort()
             if (list.length > 0) {
                 if (lst && lst.length > 0) {
