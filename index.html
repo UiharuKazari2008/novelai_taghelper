@@ -388,18 +388,21 @@
         }
     }
 
-    function getEnabledGroups() {
+    function getEnabledGroups(ignore_active) {
         const addPositiveMultiplayer = (str, num) => `{`.repeat(num) + str + `}`.repeat(num);
         const addNegativeMultiplayer = (str, num) => `[`.repeat(num) + str + `]`.repeat(num);
 
         const lst = $('#group-names .disablegroupbutton').parent()
         let list = Object.keys(localStorage);
+        let groupname = $('#groupname');
+        let group = (groupname[0].value && groupname[0].value.length > 0) ? groupname[0].value : undefined;
         let array = [];
         if (list && list.length > 0) {
             list = list
                 .filter(e => e.startsWith("taggroup-"))
                 .map(e => e.split('taggroup-').pop())
                 .filter(e => e !== "default")
+                .filter(e => !(ignore_active && group && e === group))
                 .sort()
             if (list.length > 0) {
                 if (lst && lst.length > 0) {
