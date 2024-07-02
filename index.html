@@ -401,8 +401,7 @@
             list = list
                 .filter(e => e.startsWith("taggroup-"))
                 .map(e => e.split('taggroup-').pop())
-                .filter(e => e !== "default")
-                .filter(e => e !== group)
+                .filter(e => e !== "default" && e !== group)
                 .sort()
             if (list.length > 0) {
                 if (lst && lst.length > 0) {
@@ -471,9 +470,12 @@
     }
 
     function updateTagCount() {
-        const tags = (tagNames(getWorkspaceTags(false))).length
+        let tags = 0;
+        tagNames(getWorkspaceTags(false)).map(e => {
+            tags += e.split(' ').length
+        })
         $('#tokencount')[0].innerText = tags;
-        if (tags >= 100) {
+        if (tags >= 180) {
             $('#tokencount').addClass("bg-danger")
             $('#tokencount').addClass("text-white")
             $('#tokencount').removeClass("bg-white")
