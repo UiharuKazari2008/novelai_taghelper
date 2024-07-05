@@ -115,35 +115,35 @@
                                 Type
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownGroupType">
-                                <a class="dropdown-item" href="#" data-type="000">
+                                <a class="dropdown-item data-type-entry" href="#" data-type="000">
                                     <i class="fas fa-dot-circle pe-1" style="color: #ff5f5f;"></i>
                                     <span>Base / Quality</span>
                                 </a>
-                                <a class="dropdown-item" href="#" data-type="010">
+                                <a class="dropdown-item data-type-entry" href="#" data-type="010">
                                     <i class="fas fa-dot-circle pe-1" style="color: #acff5f;"></i>
                                     <span>View Point</span>
                                 </a>
-                                <a class="dropdown-item" href="#" data-type="015">
+                                <a class="dropdown-item data-type-entry" href="#" data-type="015">
                                     <i class="fas fa-dot-circle pe-1" style="color: #5f84ff;"></i>
                                     <span>Actions</span>
                                 </a>
-                                <a class="dropdown-item" href="#" data-type="020">
+                                <a class="dropdown-item data-type-entry" href="#" data-type="020">
                                     <i class="fas fa-dot-circle pe-1" style="color: #ffda5f;"></i>
                                     <span>Character</span>
                                 </a>
-                                <a class="dropdown-item" href="#" data-type="030">
+                                <a class="dropdown-item data-type-entry" href="#" data-type="030">
                                     <i class="fas fa-dot-circle pe-1" style="color: #8c5fff;"></i>
                                     <span>Clothes</span>
                                 </a>
-                                <a class="dropdown-item" href="#" data-type="040">
+                                <a class="dropdown-item data-type-entry" href="#" data-type="040">
                                     <i class="fas fa-dot-circle pe-1" style="color: #ff975f;"></i>
                                     <span>Attribute</span>
                                 </a>
-                                <a class="dropdown-item active" href="#" data-type="050">
+                                <a class="dropdown-item data-type-entry active" href="#" data-type="050">
                                     <i class="fas fa-dot-circle pe-1" style="color: #5ffffa;"></i>
                                     <span>General</span>
                                 </a>
-                                <a class="dropdown-item" href="#" data-type="060">
+                                <a class="dropdown-item data-type-entry" href="#" data-type="060">
                                     <i class="fas fa-dot-circle pe-1" style="color: #ff5fba;"></i>
                                     <span>Scene</span>
                                 </a>
@@ -283,13 +283,45 @@
 </body>
 
 <script>
-    const groupElementStart = `<div class="d-flex w-100"><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton enablegroupbutton"><i class="fa-light fa-check-square"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton replacegroupbutton"><i class="fa-light fa-arrow-left"></i></button><li class="list-group-item d-inline-flex groupitem w-100 align-items-center px-2 border" contenteditable="false">`;
-    const groupElementStartEnabled = `<div class="d-flex w-100"><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton disablegroupbutton"><i class="fa-light fa-check-square"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton replacegroupbutton"><i class="fa-light fa-arrow-left"></i></button><li class="list-group-item d-inline-flex groupitem w-100 align-items-center px-2 border" contenteditable="false">`;
-    const groupElementMiddle = `</li><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton grouplowerbutton"><i class="fa-light fa-minus"></i></button><li class="list-group-item d-inline-flex intensity align-items-center px-2 border" contenteditable="false">`
-    const groupElementEnd = `</li><button type="button" class="btn border-dark-subtle  btn-outline-secondary tagbutton rounded-0 groupaddbutton"><i class="fa-light fa-plus"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton btn-red deletegroupbutton"><i class="fa-light fa-trash-alt"></i></button></div>`;
-
-    const tagElementStart = `<div class="d-flex"><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton btn-red deletebutton"><i class="fa-light fa-times"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton hidebtn"><i class="fa-light fa-eye-slash"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton minusbutton"><i class="fa-light fa-minus"></i></button><li class="list-group-item d-inline-flex tagitem" ondblclick="this.contentEditable=true;this.className='list-group-item d-inline-flex tagitem';" onblur="this.contentEditable=false;this.className='list-group-item d-inline-flex tagitem';" contenteditable="false">`;
-    const tagElementEnd = `</li><button type="button" class="btn border-dark-subtle  btn-outline-secondary tagbutton rounded-0 plusbutton"><i class="fa-light fa-plus"></i></button></div>`;
+    function groupElement(en, name, int) {
+        return `
+<div class="d-flex w-100">
+    <button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton ${(en) ? 'disablegroupbutton' : 'enablegroupbutton'}">
+        <i class="fa-light fa-check-square"></i>
+    </button>
+    <button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton replacegroupbutton">
+        <i class="fa-light fa-pen-to-square"></i>
+    </button>
+    <li class="list-group-item d-inline-flex groupitem w-100 align-items-center px-2 border" contenteditable="false">${name}</li>
+    <button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton grouplowerbutton">
+        <i class="fa-light fa-minus"></i>
+    </button>
+    <li class="list-group-item d-inline-flex intensity align-items-center px-2 border justify-content-center ${(int && !isNaN(parseInt(int.toString()))) ? ("intensity-" + ((parseInt(int.toString()) >= 10) ? "10" : int.toString())) : ''}" contenteditable="false" style="min-width: 36px">${(int) ? int : '-'}</li>
+    <button type="button" class="btn border-dark-subtle  btn-outline-secondary tagbutton rounded-0 groupaddbutton">
+        <i class="fa-light fa-plus"></i>
+    </button>
+    <button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton btn-red deletegroupbutton">
+        <i class="fa-light fa-trash-alt"></i>
+    </button></div>`
+    }
+    function tagElement(name) {
+        return `
+<div class="d-flex">
+    <button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton btn-red deletebutton">
+        <i class="fa-light fa-times"></i>
+    </button>
+    <button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton hidebtn">
+        <i class="fa-light fa-eye-slash"></i>
+    </button>
+    <button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton minusbutton">
+        <i class="fa-light fa-minus"></i>
+    </button>
+    <li class="list-group-item d-inline-flex tagitem" ondblclick="this.contentEditable=true;this.className='list-group-item d-inline-flex tagitem';" onblur="this.contentEditable=false;this.className='list-group-item d-inline-flex tagitem';" contenteditable="false">${name}</li>
+    <button type="button" class="btn border-dark-subtle  btn-outline-secondary tagbutton rounded-0 plusbutton">
+        <i class="fa-light fa-plus"></i>
+    </button>
+</div>`
+    }
 
     loadSavedData();
 
@@ -300,12 +332,13 @@
     });
 
     function saveSettings() {
-        const enabled_groups = $('#group-names .disablegroupbutton').parent();
+        const enabled_groups = $('#groupsAccordion .disablegroupbutton').parent();
         if (enabled_groups && enabled_groups.length > 0) {
             localStorage.setItem(`settings-groups`, JSON.stringify({
                 enabled: enabled_groups
                     .map(n => {
                         return {
+                            type: enabled_groups[n].parentNode.parentNode.attributes["data-type"].value,
                             name: enabled_groups[n].children[2].innerText.split(" ").join("_").trim(),
                             value: enabled_groups[n].children[4].innerText.trim()
                         }
@@ -438,7 +471,7 @@
         let text = ""
         for (let item of split) {
             if (item !== '') {
-                text += '\n' + tagElementStart + item + tagElementEnd;
+                text += '\n' + tagElement(item);
             }
         }
         return text;
@@ -557,11 +590,11 @@
                 list.forEach(n => {
                     let htmlString;
                     let name = n.substring(4).split("_").join(" ").trim();
-                    if (enabled && enlist.map(e => e.name).indexOf(n) !== -1) {
-                        const multiplyer = enlist[enlist.map(e => e.name).indexOf(n)].value
-                        htmlString = `${groupElementStartEnabled}${name}${groupElementMiddle}${multiplyer}${groupElementEnd}`;
+                    if (enabled && enlist.map(e => e.type + '-' + e.name).indexOf(n) !== -1) {
+                        const multiplyer = enlist[enlist.map(e => e.type + '-' + e.name).indexOf(n)].value
+                        htmlString = groupElement(true, name, multiplyer);
                     } else {
-                        htmlString = `${groupElementStart}${name}${groupElementMiddle}-${groupElementEnd}`;
+                        htmlString = groupElement(false, name);
                     }
                     if (n.startsWith("000")) {
                         $("#collapseBaseTags .card-body").append($(htmlString));
@@ -630,7 +663,7 @@
         const addPositiveMultiplayer = (str, num) => `{`.repeat(num) + str + `}`.repeat(num);
         const addNegativeMultiplayer = (str, num) => `[`.repeat(num) + str + `]`.repeat(num);
 
-        const lst = $('#group-names .disablegroupbutton').parent()
+        const lst = $('#groupsAccordion .disablegroupbutton').parent()
         let list = Object.keys(localStorage);
         let groupname = $('#groupname');
         let group = (groupname[0].value && groupname[0].value.length > 0) ? groupname[0].value.split(" ").join("_").trim() : undefined;
@@ -646,8 +679,9 @@
                     lst
                         .map(n => {
                             const name = lst[n].children[2].innerText.split(" ").join("_").trim()
+                            const type = lst[n].parentNode.parentNode.attributes["data-type"].value;
                             const intentity = lst[n].children[4].innerText.trim()
-                            const data = localStorage.getItem('taggroup-' + name)
+                            const data = localStorage.getItem('taggroup-' + type + '-' + name)
                             const dataList = $(data);
                             let temp = [];
 
@@ -724,6 +758,22 @@
         }
     }
 
+    function updateIntensityColor(obj) {
+        const intetag = Array.from(obj.classList).filter(e => e.startsWith("intensity"))[0]
+        if (intetag)
+            obj.classList.remove(intetag);
+        if (obj.textContent !== "-") {
+            const int = parseInt(obj.textContent);
+            if (!isNaN(int)) {
+                if (int >= 10) {
+                    obj.classList.add("intensity-10")
+                } else {
+                    obj.classList.add("intensity-" + int.toString())
+                }
+            }
+        }
+    }
+
     $(document).on('click', '.copyclipboard', compileTags);
     $(document).bind('keydown', 'ctrl+c', () => {
         let focusedElement = document.activeElement;
@@ -754,11 +804,6 @@
     });
 
     // Tag list actions
-    $(document).on('click', '.add-el', function () {
-        let lst = $('#simpleList');
-        lst.append(`${tagElementStart}Tag${tagElementEnd}`);
-        updateTagCount();
-    });
     $(document).on('click', '.plusbutton', function () {
         let parentDiv = $(this).parent();
         parentDiv[0].children[3].textContent = increasePriority(parentDiv[0].children[3].textContent);
@@ -824,6 +869,7 @@
                 return val;
             }
         })(parentDiv[0].children[4].textContent)
+        updateIntensityColor(parentDiv[0].children[4]);
     });
     $(document).on('click', '.grouplowerbutton', function () {
         let parentDiv = $(this).parent();
@@ -838,6 +884,11 @@
                 return val;
             }
         })(parentDiv[0].children[4].textContent)
+        updateIntensityColor(parentDiv[0].children[4]);
+    });
+    $(document).on('click', '.data-type-entry', function () {
+        $("#dropdownGroupTypeMenu .dropdown-item").removeClass('active');
+        $(this)[0].classList.add('active');
     });
 
     $(document).on('click', '.cleartags', function () {
