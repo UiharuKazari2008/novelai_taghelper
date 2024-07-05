@@ -106,19 +106,155 @@
             </div>
             <div class="col-sm">
                 <div class="input-group mb-3">
+
                     <input id="groupname" type="text" class="form-control" placeholder="default" aria-label=""
                            aria-describedby="basic-addon1">
-                    <div class="input-group-append">
-                        <button type="button" class="savecontext btn btn-primary" title="Save context of the current tags">
+                    <div class="input-group-append d-flex">
+                        <div class="dropdown" id="dropdownGroupTypeMenu">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownGroupType" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius: 0!important; border-radius: 0 !important;">
+                                Type
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownGroupType">
+                                <a class="dropdown-item" href="#" data-type="000">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #ff5f5f;"></i>
+                                    <span>Base / Quality</span>
+                                </a>
+                                <a class="dropdown-item" href="#" data-type="010">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #acff5f;"></i>
+                                    <span>View Point</span>
+                                </a>
+                                <a class="dropdown-item" href="#" data-type="020">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #ffda5f;"></i>
+                                    <span>Character</span>
+                                </a>
+                                <a class="dropdown-item" href="#" data-type="030">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #8c5fff;"></i>
+                                    <span>Clothes</span>
+                                </a>
+                                <a class="dropdown-item" href="#" data-type="040">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #ff975f;"></i>
+                                    <span>Attribute</span>
+                                </a>
+                                <a class="dropdown-item active" href="#" data-type="050">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #5ffffa;"></i>
+                                    <span>General</span>
+                                </a>
+                                <a class="dropdown-item" href="#" data-type="060">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #ff5fba;"></i>
+                                    <span>Scene</span>
+                                </a>
+                            </div>
+                        </div>
+                        <button type="button" class="savecontext btn btn-primary" style="border-top-left-radius: 0!important; border-bottom-left-radius: 0 !important;" title="Save context of the current tags">
                             <i class="fa-light fa-save"></i>
                         </button>
                     </div>
                 </div>
-                <div class="row">
-                    <div id="group-names" class="list-group col">
-                        <h3>
-                            <span>No Saved Groups</span>
-                        </h3>
+                <div id="groupsAccordion">
+                    <div class="card">
+                        <div class="card-header p-0" id="baseTags">
+                            <h5 class="mb-0">
+                                <button class="btn  btn-link text-decoration-none" data-bs-toggle="collapse" data-bs-target="#collapseBaseTags" aria-expanded="true" aria-controls="collapseBaseTags">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #ff5f5f;"></i>
+                                    <span class="">Base / Quality</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseBaseTags" class="collapse show" aria-labelledby="baseTags" data-bs-parent="#accordion" data-type="000">
+                            <div class="p-0 card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class=" card-header p-0" id="viewPointTags">
+                            <h5 class="mb-0">
+                                <button class="btn  btn-link text-decoration-none collapsed" data-bs-toggle="collapse" data-bs-target="#collapseViewPointTags" aria-expanded="false" aria-controls="collapseViewPointTags">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #acff5f;"></i>
+                                    <span>View Point</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseViewPointTags" class="collapse" aria-labelledby="viewPointTags" data-bs-parent="#accordion" data-type="010">
+                            <div class="p-0 card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class=" card-header p-0" id="characterTags">
+                            <h5 class="mb-0">
+                                <button class="btn  btn-link text-decoration-none collapsed" data-bs-toggle="collapse" data-bs-target="#collapseCharacterTags" aria-expanded="false" aria-controls="collapseCharacterTags">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #ffda5f;"></i>
+                                    <span>Character</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseCharacterTags" class="collapse" aria-labelledby="characterTags" data-bs-parent="#accordion" data-type="020">
+                            <div class="p-0 card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class=" card-header p-0" id="clothesTags">
+                            <h5 class="mb-0">
+                                <button class="btn  btn-link text-decoration-none collapsed" data-bs-toggle="collapse" data-bs-target="#collapseClothesTags" aria-expanded="false" aria-controls="collapseClothesTags">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #8c5fff;"></i>
+                                    <span>Clothes</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseClothesTags" class="collapse" aria-labelledby="clothesTags" data-bs-parent="#accordion" data-type="030">
+                            <div class="p-0 card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class=" card-header p-0" id="attributeTags">
+                            <h5 class="mb-0">
+                                <button class="btn  btn-link text-decoration-none collapsed" data-bs-toggle="collapse" data-bs-target="#collapseAttributeTags" aria-expanded="false" aria-controls="collapseAttributeTags">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #ff975f;"></i>
+                                    <span>Attribute</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseAttributeTags" class="collapse" aria-labelledby="attributeTags" data-bs-parent="#accordion" data-type="040">
+                            <div class="p-0 card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class=" card-header p-0" id="generalTags">
+                            <h5 class="mb-0">
+                                <button class="btn  btn-link text-decoration-none collapsed" data-bs-toggle="collapse" data-bs-target="#collapseGeneralTags" aria-expanded="false" aria-controls="collapseGeneralTags">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #5ffffa;"></i>
+                                    <span>General</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseGeneralTags" class="collapse" aria-labelledby="generalTags" data-bs-parent="#accordion" data-type="050">
+                            <div class="p-0 card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class=" card-header p-0" id="sceneTags">
+                            <h5 class="mb-0">
+                                <button class="btn  btn-link text-decoration-none collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSceneTags" aria-expanded="false" aria-controls="collapseSceneTags">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #ff5fba;"></i>
+                                    <span>Scene</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseSceneTags" class="collapse" aria-labelledby="sceneTags" data-bs-parent="#accordion" data-type="060">
+                            <div class="p-0 card-body">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -128,9 +264,9 @@
 </body>
 
 <script>
-    const groupElementStart = `<div class="d-flex w-100 mx-2"><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton enablegroupbutton"><i class="fa-light fa-check-square"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton replacegroupbutton"><i class="fa-light fa-arrow-left"></i></button><li class="list-group-item d-inline-flex groupitem w-100" contenteditable="false">`;
-    const groupElementStartEnabled = `<div class="d-flex w-100 mx-2"><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton disablegroupbutton"><i class="fa-light fa-check-square"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton replacegroupbutton"><i class="fa-light fa-arrow-left"></i></button><li class="list-group-item d-inline-flex groupitem w-100" contenteditable="false">`;
-    const groupElementMiddle = `</li><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton grouplowerbutton"><i class="fa-light fa-minus"></i></button><li class="list-group-item d-inline-flex intensity" contenteditable="false">`
+    const groupElementStart = `<div class="d-flex w-100"><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton enablegroupbutton"><i class="fa-light fa-check-square"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton replacegroupbutton"><i class="fa-light fa-arrow-left"></i></button><li class="list-group-item d-inline-flex groupitem w-100 align-items-center px-2 border" contenteditable="false">`;
+    const groupElementStartEnabled = `<div class="d-flex w-100"><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton disablegroupbutton"><i class="fa-light fa-check-square"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton replacegroupbutton"><i class="fa-light fa-arrow-left"></i></button><li class="list-group-item d-inline-flex groupitem w-100 align-items-center px-2 border" contenteditable="false">`;
+    const groupElementMiddle = `</li><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton grouplowerbutton"><i class="fa-light fa-minus"></i></button><li class="list-group-item d-inline-flex intensity align-items-center px-2 border" contenteditable="false">`
     const groupElementEnd = `</li><button type="button" class="btn border-dark-subtle  btn-outline-secondary tagbutton rounded-0 groupaddbutton"><i class="fa-light fa-plus"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton btn-red deletegroupbutton"><i class="fa-light fa-trash-alt"></i></button></div>`;
 
     const tagElementStart = `<div class="d-flex"><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton btn-red deletebutton"><i class="fa-light fa-times"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton hidebtn"><i class="fa-light fa-eye-slash"></i></button><button type="button" class="btn border-dark-subtle  btn-outline-secondary btn-md rounded-0 tagbutton minusbutton"><i class="fa-light fa-minus"></i></button><li class="list-group-item d-inline-flex tagitem" ondblclick="this.contentEditable=true;this.className='list-group-item d-inline-flex tagitem';" onblur="this.contentEditable=false;this.className='list-group-item d-inline-flex tagitem';" contenteditable="false">`;
@@ -360,7 +496,8 @@
         let last = Object.keys(localStorage);
         let groupname = $('#groupname');
         let tags = $('#simpleList')[0];
-        let group = (groupname[0].value && groupname[0].value.length > 0) ? groupname[0].value : "default";
+        const type = $("#dropdownGroupTypeMenu .active")[0].attributes["data-type"].value;
+        let group = (groupname[0].value && groupname[0].value.length > 0) ? type + "-" + groupname[0].value : "default";
         group = group.split(" ").join("_").trim();
 
         localStorage.setItem(`taggroup-${group}`, tags.innerHTML);
@@ -380,7 +517,14 @@
         updateTagCount();
     }
     function updateGroupList(enabled) {
-        let lst = $('#group-names');
+        $("#collapseBaseTags .card-body")[0].innerHTML      = "";
+        $("#collapseViewPointTags .card-body")[0].innerHTML = "";
+        $("#collapseCharacterTags .card-body")[0].innerHTML = "";
+        $("#collapseClothesTags .card-body")[0].innerHTML   = "";
+        $("#collapseAttributeTags .card-body")[0].innerHTML = "";
+        $("#collapseGeneralTags .card-body")[0].innerHTML   = "";
+        $("#collapseSceneTags .card-body")[0].innerHTML     = "";
+
         let list = Object.keys(localStorage);
         const enlist = (enabled) ? Object.values((JSON.parse(enabled)).enabled) : undefined;
         if (list && list.length > 0) {
@@ -390,17 +534,68 @@
                 .filter(e => e !== "default")
                 .sort()
             if (list.length > 0) {
-                lst[0].innerHTML = "";
                 list.forEach(n => {
-                    let name = n.split("_").join(" ").trim();
+                    let htmlString;
+                    let name = n.substring(4).split("_").join(" ").trim();
                     if (enabled && enlist.map(e => e.name).indexOf(n) !== -1) {
                         const multiplyer = enlist[enlist.map(e => e.name).indexOf(n)].value
-                        lst.append(`${groupElementStartEnabled}${name}${groupElementMiddle}${multiplyer}${groupElementEnd}`);
+                        htmlString = `${groupElementStartEnabled}${name}${groupElementMiddle}${multiplyer}${groupElementEnd}`;
                     } else {
-                        lst.append(`${groupElementStart}${name}${groupElementMiddle}-${groupElementEnd}`);
+                        htmlString = `${groupElementStart}${name}${groupElementMiddle}-${groupElementEnd}`;
+                    }
+                    if (n.startsWith("000")) {
+                        $("#collapseBaseTags .card-body").append($(htmlString));
+                    } else if (n.startsWith("010")) {
+                        $("#collapseViewPointTags .card-body").append($(htmlString));
+                    } else if (n.startsWith("020")) {
+                        $("#collapseCharacterTags .card-body").append($(htmlString));
+                    } else if (n.startsWith("030")) {
+                        $("#collapseClothesTags .card-body").append($(htmlString));
+                    } else if (n.startsWith("040")) {
+                        $("#collapseAttributeTags .card-body").append($(htmlString));
+                    } else if (n.startsWith("060")) {
+                        $("#collapseSceneTags .card-body").append($(htmlString));
+                    } else {
+                        $("#collapseGeneralTags .card-body").append($(htmlString));
                     }
                 })
             }
+        }
+
+        if ($("#collapseBaseTags .card-body")[0].children.length === 0) {
+            $("#collapseBaseTags").parent().addClass('d-none');
+        } else {
+            $("#collapseBaseTags").parent().removeClass('d-none');
+        }
+        if ($("#collapseViewPointTags .card-body")[0].children.length === 0) {
+            $("#collapseViewPointTags").parent().addClass('d-none');
+        } else {
+            $("#collapseViewPointTags").parent().removeClass('d-none');
+        }
+        if ($("#collapseCharacterTags .card-body")[0].children.length === 0) {
+            $("#collapseCharacterTags").parent().addClass('d-none');
+        } else {
+            $("#collapseCharacterTags").parent().removeClass('d-none');
+        }
+        if ($("#collapseClothesTags .card-body")[0].children.length === 0) {
+            $("#collapseClothesTags").parent().addClass('d-none');
+        } else {
+            $("#collapseClothesTags").parent().removeClass('d-none');
+        }
+        if ($("#collapseAttributeTags .card-body")[0].children.length === 0) {
+            $("#collapseAttributeTags").parent().addClass('d-none');
+        } else {
+            $("#collapseAttributeTags").parent().removeClass('d-none');
+        }
+        if ($("#collapseGeneralTags .card-body")[0].children.length === 0) {
+            $("#collapseGeneralTags").parent().addClass('d-none');
+        } else {
+            $("#collapseGeneralTags").parent().removeClass('d-none');
+        }
+        if ($("#collapseSceneTags .card-body")[0].children.length === 0) {
+            $("#collapseSceneTags").parent().addClass('d-none');
+        } else {
+            $("#collapseSceneTags").parent().removeClass('d-none');
         }
     }
 
@@ -559,18 +754,25 @@
     });
 
     $(document).on('click', '.deletegroupbutton', function () {
-        const group = `taggroup-${$(this).parent()[0].children[2].innerText.split(" ").join("_").trim()}`;
+        const type = $(this).parent().parent().parent()[0].attributes["data-type"].value;
+        const group = `taggroup-${type}-${$(this).parent()[0].children[2].innerText.split(" ").join("_").trim()}`;
         localStorage.removeItem(group)
         $(this).parent().remove();
     });
     $(document).on('click', '.replacegroupbutton', function () {
+        const type = $(this).parent().parent().parent()[0].attributes["data-type"].value;
         const rawname = $(this).parent()[0].children[2].innerText;
-        const group = `taggroup-${rawname.split(" ").join("_").trim()}`;
+        const group = `taggroup-${type}-${rawname.split(" ").join("_").trim()}`;
         let name = rawname.split("_").join(" ").trim();
         const content = localStorage.getItem(group);
         if (content) {
+            $("#dropdownGroupTypeMenu .dropdown-item").removeClass('active');
+            $(`#dropdownGroupTypeMenu .dropdown-item[data-type=${type}]`).addClass("active");
             $('#simpleList')[0].innerHTML = content;
             $('#groupname')[0].value = name;
+            if ($("#dropdownGroupTypeMenu .active").length === 0) {
+                $(`#dropdownGroupTypeMenu .dropdown-item[data-type=050]`).addClass("active");
+            }
         }
         updateTagCount();
     });
@@ -698,3 +900,4 @@
     }
 
 </script>
+</html>
