@@ -123,6 +123,10 @@
                                     <i class="fas fa-dot-circle pe-1" style="color: #acff5f;"></i>
                                     <span>View Point</span>
                                 </a>
+                                <a class="dropdown-item" href="#" data-type="015">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #5f84ff;"></i>
+                                    <span>Actions</span>
+                                </a>
                                 <a class="dropdown-item" href="#" data-type="020">
                                     <i class="fas fa-dot-circle pe-1" style="color: #ffda5f;"></i>
                                     <span>Character</span>
@@ -176,6 +180,21 @@
                             </h5>
                         </div>
                         <div id="collapseViewPointTags" class="collapse" aria-labelledby="viewPointTags" data-bs-parent="#accordion" data-type="010">
+                            <div class="p-0 card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class=" card-header p-0" id="actionsTags">
+                            <h5 class="mb-0">
+                                <button class="btn  btn-link text-decoration-none collapsed" data-bs-toggle="collapse" data-bs-target="#collapseActionTags" aria-expanded="false" aria-controls="collapseActionTags">
+                                    <i class="fas fa-dot-circle pe-1" style="color: #5f84ff;"></i>
+                                    <span>Actions</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseActionTags" class="collapse" aria-labelledby="actionsTags" data-bs-parent="#accordion" data-type="015">
                             <div class="p-0 card-body">
 
                             </div>
@@ -519,6 +538,7 @@
     function updateGroupList(enabled) {
         $("#collapseBaseTags .card-body")[0].innerHTML      = "";
         $("#collapseViewPointTags .card-body")[0].innerHTML = "";
+        $("#collapseActionTags .card-body")[0].innerHTML = "";
         $("#collapseCharacterTags .card-body")[0].innerHTML = "";
         $("#collapseClothesTags .card-body")[0].innerHTML   = "";
         $("#collapseAttributeTags .card-body")[0].innerHTML = "";
@@ -547,6 +567,8 @@
                         $("#collapseBaseTags .card-body").append($(htmlString));
                     } else if (n.startsWith("010")) {
                         $("#collapseViewPointTags .card-body").append($(htmlString));
+                    } else if (n.startsWith("015")) {
+                        $("#collapseActionTags .card-body").append($(htmlString));
                     } else if (n.startsWith("020")) {
                         $("#collapseCharacterTags .card-body").append($(htmlString));
                     } else if (n.startsWith("030")) {
@@ -571,6 +593,11 @@
             $("#collapseViewPointTags").parent().addClass('d-none');
         } else {
             $("#collapseViewPointTags").parent().removeClass('d-none');
+        }
+        if ($("#collapseActionTags .card-body")[0].children.length === 0) {
+            $("#collapseActionTags").parent().addClass('d-none');
+        } else {
+            $("#collapseActionTags").parent().removeClass('d-none');
         }
         if ($("#collapseCharacterTags .card-body")[0].children.length === 0) {
             $("#collapseCharacterTags").parent().addClass('d-none');
