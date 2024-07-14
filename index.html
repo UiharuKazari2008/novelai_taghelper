@@ -686,7 +686,7 @@
                             let temp = [];
 
                             for (let item of dataList) {
-                                if (item.children && !item.children[0].classList.contains('parenttransparent')) {
+                                if (item.classList && Array.from(item.classList).indexOf('parenttransparent') === -1) {
                                     temp.push(item.children[3].textContent.trim());
                                 }
                             }
